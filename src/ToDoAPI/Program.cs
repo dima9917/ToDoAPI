@@ -38,4 +38,12 @@ app.MapPost("api/todo", async (AppDbContext context, ToDoItem item) =>
         return Results.Created("api/todo/" + item.Id ,item);
     }
 );
+
+app.MapPost("api/todopost", async (AppDbContext context, ToDoItem item) =>
+    {
+        await context.ToDoItems.AddAsync(item);
+        await context.SaveChangesAsync();
+        return Results.Created("api/todo/" + item.Id ,item);
+    }
+);
 app.Run();
